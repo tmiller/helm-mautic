@@ -33,17 +33,10 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            {{- if .Values.externalDB.enabled }}
             - name: MAUTIC_DB_HOST
               value: {{ .Values.externalDB.host }}:{{ .Values.externalDB.port }}
             - name: MAUTIC_DB_PASSWORD
               value: {{ .Values.externalDB.rootPassword }}
-            {{- else }}
-            - name: MAUTIC_DB_HOST
-              value: {{ include "mautic.fullname" . }}-mysql:{{ .Values.mysql.service.port }}
-            - name: MAUTIC_DB_PASSWORD
-              value: {{ .Values.mysql.mysqlRootPassword }}
-            {{- end }}
             - name: MAUTIC_URL
               value: http://mautic2.example.com
             {{- with .Values.extraEnvs }}
