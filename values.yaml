@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: mautic/mautic
-  tag: 2.13-apache
+  tag: v4-apache
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -50,6 +50,10 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+extraEnvs: []
+#   - name: MAUTIC_CONFIG_DEBUG
+#     value: "1"
+
 externalDB:
   enabled: false
   host: ""
@@ -66,13 +70,13 @@ mysql:
   enabled: true
   mysqlRootPassword: test123
   image: "mysql"
-  imageTag: "5.6" 
+  imageTag: "5.6"
   imagePullPolicy: "IfNotPresent"
 
   busybox:
     image: "busybox"
     tag: "1.29.3"
-  
+
   service:
     annotations: {}
     ## Specify a service type
@@ -100,7 +104,7 @@ mysql:
     enabled: false
     runAsUser: 999
     fsGroup: 999
-  
+
   resources:
     requests:
       memory: 256Mi
